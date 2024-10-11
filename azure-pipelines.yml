@@ -1,6 +1,7 @@
 trigger:
 - loans
 - master
+- feature/*
 
 pool:
   vmImage: ubuntu-latest
