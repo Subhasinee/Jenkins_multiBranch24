@@ -2,7 +2,6 @@ trigger:
   branches:
     include:
       - master
-      - azure-pipelines
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -24,3 +23,5 @@ stages:
              echo "BuildID: $(Build.BuildID)"
              echo "Repository Name: $(Build.Repository.Name)"
              echo "Source Version: $(Build.SourceVersion)"
+             echo "DefaultWorking Directories: $(system.DefaultWorkingDirectory)"
+
