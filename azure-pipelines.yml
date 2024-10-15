@@ -1,0 +1,27 @@
+trigger:
+  branches:
+    include:
+      - master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildNumber: $(Build.BuildNumber)
+  sourceBranch: $(Build.SourceBranchName)
+  artifactDir: $(Build.ArtifactStagingDirectory)
+
+stages: 
+ - stage: build
+   displayName: 'Build Stage'
+   jobs:
+     - job: BuildJob
+       displayName: 'Building Application'
+       steps:
+         - script: |
+             echo "Building from branch: $(sourceBranch)"
+             echo "BuildID: $(Build.BuildID)"
+             echo "Repository Name: $(Build.Repository.Name)"
+             echo "Source Version: $(Build.SourceVersion)"
+             echo "DefaultWorking Directories: $(system.DefaultWorkingDirectory)"
+
