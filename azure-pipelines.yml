@@ -2,7 +2,6 @@ trigger:
   branches:
     include:
       - master
-      - develop
       - azure-pipelines
 
 pool:
@@ -13,7 +12,15 @@ variables:
   sourceBranch: $(Build.SourceBranchName)
   artifactDir: $(Build.ArtifactStagingDirectory)
 
-steps:
-  - script: 'echo $(buildNumber)'
-  - script: 'echo $(sourceBranch)'
-  - script: 'echo $(artifactDir)'
+stages: 
+ - stage: build
+   displayName: 'Build Stage'
+   jobs:
+     - job: BuildJob
+       displayName: 'Building Application'
+       steps:
+         - script: |
+             echo "Building from branch: $(sourceBranch)"
+             echo "BuildID: $(Build.BuildID)"
+             echo "Repository Name: $(Build.Repository.Name)"
+             echo "Source Version: $(Build.SourceVersion)"
