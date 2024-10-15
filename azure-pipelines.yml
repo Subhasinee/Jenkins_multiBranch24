@@ -1,19 +1,18 @@
 trigger:
-- loans
-- master
-- feature/*
+  branches:
+    include:
+      - master
+      - develop
+      - azure-pipelines
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildNumber: $(Build.BuildNumber)
+  sourceBranch: $(Build.SourceBranchName)
+  artifactDir: $(Build.ArtifactStagingDirectory)
 
 steps:
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.11'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
+  - script: 'echo $(buildNumber)'
+  - script: 'echo $(sourceBranch)'
